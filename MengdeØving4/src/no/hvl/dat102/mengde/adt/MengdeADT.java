@@ -8,7 +8,7 @@ public interface MengdeADT<T> extends Iterable<T>{
 	// Interface som definerer alle operasjoner i en ADT
 	// med navn MengdeADT (en datasamling, en h�yniv� datastruktur)
 
-	/**
+	/** 
 	 * Legger til et objekt av klasse T til dette mengde-objektet hvis det ikke
 	 * fins fra f�r
 	 * 
