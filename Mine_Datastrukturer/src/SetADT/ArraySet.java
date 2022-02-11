@@ -6,6 +6,7 @@ import java.util.Iterator.*;
 import java.util.Objects;
 import java.util.Random;
 
+import Node_Hjelp.Node;
 import exceptions.EmptyCollectionException;
 
 public class ArraySet<T> implements SetADTInterface<T> {
@@ -89,8 +90,20 @@ public class ArraySet<T> implements SetADTInterface<T> {
 
 	@Override
 	public SetADTInterface<T> union(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return null;
+		SetADTInterface<T> begge = new ArraySet<T>();
+
+		for (int i = 0; i < numberOfElements && set[i] != null; i++) {
+			begge.insert(set[i]);
+		}
+
+		Iterator<T> teller = m2.iterator();
+		while(teller.hasNext()) {
+			T element = teller.next();
+			if(!this.contains(element)) {
+				begge.insert(element);
+			}
+		}
+		return begge;
 	}
 
 	@Override
@@ -119,20 +132,40 @@ public class ArraySet<T> implements SetADTInterface<T> {
 
 	@Override
 	public SetADTInterface<T> snitt(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return null;
+		SetADTInterface<T> snittM = new ArraySet<T>();
+
+		for (int i = 0; i < numberOfElements && set[i] != null; i++) {			
+			if(!snittM.contains(set[i]) && m2.contains(set[i])) {
+				snittM.add(set[i]);
+			}
+		}
+		return snittM;
 	}
 
 	@Override
 	public SetADTInterface<T> differens(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return null;
+		SetADTInterface<T> differensM = new ArraySet<T>();
+		for (int i = 0; i < numberOfElements; i++) {
+			if(!m2.contains(set[i])) {
+				differensM.add(set[i]);
+			}
+		}
+		return differensM;
 	}
 
 	@Override
 	public boolean subset(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return false;
+		Iterator<T> teller = m2.iterator();
+		boolean subset = true;
+		
+		while(teller.hasNext()) {
+			T element = teller.next();
+			if(!this.contains(element)) {
+				subset = false;
+				break;
+			}
+		}
+		return subset;
 	}
 
 	@Override
@@ -187,8 +220,8 @@ public class ArraySet<T> implements SetADTInterface<T> {
 	 */
 	@Override
 	public void insert(T el) {
-		// TODO Auto-generated method stub
-		
+		set[numberOfElements] = el;
+		numberOfElements++;
 	}
 	
 

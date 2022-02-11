@@ -5,7 +5,6 @@ import java.util.Objects;
 import Node_Hjelp.Node;
 import exceptions.EmptyCollectionException;
 
-
 public class LinkedSet<T> implements SetADTInterface<T> {
 
 	private int antall;
@@ -142,14 +141,31 @@ public class LinkedSet<T> implements SetADTInterface<T> {
 
 	@Override
 	public SetADTInterface<T> differens(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return null;
+		SetADTInterface<T> differensM = new LinkedSet<T>();
+		Node<T> denne = start;
+		
+		while(denne != null) {
+			if(!m2.contains(denne.getData())) {
+				differensM.add(denne.getData());
+			}
+			denne = denne.getNext();
+		}
+		return differensM;
 	}
 
 	@Override
 	public boolean subset(SetADTInterface<T> m2) {
-		// TODO Auto-generated method stub
-		return false;
+		Iterator<T> teller = m2.iterator();
+		boolean subset = true;
+		
+		while(teller.hasNext()) {
+			T element = teller.next();
+			if(!this.contains(element)) {
+				subset = false;
+				break;
+			}
+		}
+		return subset;
 	}
 
 	@Override

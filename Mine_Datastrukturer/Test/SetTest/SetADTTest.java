@@ -73,6 +73,9 @@ public abstract class SetADTTest {
 		
 		SetADTInterface<Integer> union = set.union(m1);
 		
+		System.out.println(union.size());
+		System.out.println(union.getClass());
+		
 		assertEquals(union.size(), 4);
 	}
 	
