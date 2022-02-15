@@ -74,7 +74,7 @@ public class Filmarkiv implements FilmarkivADT {
 				p++;
 			} // end if
 		} // end for
-		return filmer;
+		return trimTab(filmer, filmer.length);
 	}
 	
 	public int antall(Sjanger sjanger) {
