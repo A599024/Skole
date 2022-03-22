@@ -6,7 +6,7 @@ import java.util.TreeSet;
 
 public class vs {
 	
-	private static int n = 15000;
+	private static int n = 100000;
 	private static Integer[] tab = new Integer[n];
 	private static int[] tab2 = new int[n];
 
@@ -72,7 +72,7 @@ public class vs {
 		tider.sort(null);
 		// PRINT
 		for(int i = 0; i < tider.size(); i ++) {
-
+			
 			if(tider.get(i) == tidInsert)
 				System.out.println("Insertion sort: " + tidInsert);
 			else if(tider.get(i)  == tidMerge)

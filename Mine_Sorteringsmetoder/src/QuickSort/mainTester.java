@@ -4,7 +4,7 @@ import SelectionSort.SelectionSort;
 
 public class mainTester {
 	
-	private static Integer n = 10000;
+	private static Integer n = 100000;
 	private static Integer[] tab = new Integer[n];
 	
 	

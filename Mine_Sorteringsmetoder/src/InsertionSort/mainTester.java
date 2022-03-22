@@ -1,17 +1,17 @@
 package InsertionSort;
 
-import QuickSort.*;
+import InsertionSort.*;
 
 public class mainTester {
 	
-	private static Integer n = 40;
+	private static Integer n = 10;
 	private static Integer[] tab = new Integer[n];
 	
 	
 	public static void main(String[] args) {
 		
 		fyllTab(tab);
-		QuickSort.quickSort(tab, n);
+		InsertionSort.sort2xInsertion(tab, n);
 		skrivUt(tab);
 	
 		

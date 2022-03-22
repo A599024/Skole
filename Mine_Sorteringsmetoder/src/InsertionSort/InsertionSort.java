@@ -76,4 +76,22 @@ public class InsertionSort {
 		}
 	}
 	
+	public static <T extends Comparable<? super T>> void sort2xInsertion(T[] a, int n) {
+		
+		for (int i = 0 + 2; i <= a.length; i++) {
+			T temp = a[i];
+			int j = i - 2;
+			boolean ferdig = false;
+			while (!ferdig && j >= 0) {
+				if (temp.compareTo(a[j]) < 0) {
+					a[j + 1] = a[j];
+					j--;
+				} else {
+					ferdig = true;
+				}
+			}
+			a[j + 1] = temp;
+		}
+	}
+	
 }
