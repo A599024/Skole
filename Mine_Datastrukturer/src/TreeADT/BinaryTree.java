@@ -3,7 +3,10 @@ package TreeADT;
 import java.util.Iterator;
 
 import Node_Hjelp.BinaryNode;
+import StackADT.LinkedStack;
+import StackADT.StackADTInterface;
 import exceptions.EmptyTreeException;
+import exceptions.NoSuchElementException;
 
 public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInterface<T> {
 
@@ -22,16 +25,10 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 		privateSetTree(element, leftTree, rightTree);
 	}
 	
-	/*
-	 * 
-	 */
 	public void setTree(T rootData) {
 		root = new BinaryNode<>(rootData);
 	}
 	
-	/*
-	 * 
-	 */
 	public void setTree(T element, BinaryTree<T> leftTree, BinaryTree<T> rightTree) {
 		privateSetTree(element, leftTree, rightTree);
 	}
@@ -62,8 +59,10 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 	
 	@Override
 	public boolean contains(T element) {
-		// TODO Auto-generated method stub
-		return false;
+		if(find(element) == null)
+			return false;
+		
+		return true;
 	}
 
 	@Override
@@ -78,8 +77,8 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 		T result = null;
 		
 		// Basis p == null
-		if(root.getElement() != null) {
-			int comp = element.compareTo(root.getElement());
+		if(p.getElement() != null) {
+			int comp = element.compareTo(p.getElement());
 			if(comp == 0)
 			{
 				result = p.getElement();
@@ -133,9 +132,8 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 	}
 
 	@Override
-	public Iterator<T> getInordenIterator() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterator<T> getInorderIterator() {
+		return new InorderIterator();
 	}
 	
 	public T getRootData() {
@@ -167,11 +165,64 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 
 	@Override
 	public int getHeight() {
-		return root.getHeight();
+		return getHeight(root);
+	}
+	
+	private int getHeight(BinaryNode<T> node) {
+		int height = 0;
+		
+		if(node != null)
+			height = 1 + Math.max(getHeight(node.getLeft()),
+								  getHeight(node.getRight()));
+		
+		return height;
 	}
 
 	@Override
 	public int getNumberOfNodes() {
 		return root.getNumberOfNodes();
+	}
+	
+	
+	
+	
+	
+	/**********************************
+		PRIVAT HJELPEKLASSE
+	**********************************/
+	private class InorderIterator implements Iterator<T> {
+
+		private StackADTInterface<BinaryNode<T>> nodeStack;
+		private BinaryNode<T> currentNode;
+		
+		public InorderIterator() {
+			nodeStack = new LinkedStack<>();
+			currentNode = root;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !nodeStack.isEmpty() || currentNode != null;
+		}
+
+		@Override
+		public T next() {
+			BinaryNode<T> nextNode = null;
+			
+			while(currentNode != null) {
+				nodeStack.push(currentNode);
+				currentNode = currentNode.getLeft();
+			}
+			
+			if(!nodeStack.isEmpty()) {
+				nextNode = nodeStack.pop();
+				assert nextNode != null;
+				currentNode = nextNode.getRight();
+			}
+			else {
+				throw new NoSuchElementException();
+			}
+			return nextNode.getElement();
+		}
 	}
 }

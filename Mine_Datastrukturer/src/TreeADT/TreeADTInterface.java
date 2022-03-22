@@ -44,7 +44,7 @@ public interface TreeADTInterface<T extends Comparable<? super T>> {
 	 * 
 	 * @return Iterator Object
 	 */
-	Iterator<T> getInordenIterator();
+	Iterator<T> getInorderIterator();
 	
 	/**
 	 * @return Height of the tree
