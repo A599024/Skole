@@ -3,7 +3,6 @@ package SetTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,9 +71,6 @@ public abstract class SetADTTest {
 		set.add(e4);
 		
 		SetADTInterface<Integer> union = set.union(m1);
-		
-		System.out.println(union.size());
-		System.out.println(union.getClass());
 		
 		assertEquals(union.size(), 4);
 	}

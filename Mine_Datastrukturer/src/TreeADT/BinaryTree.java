@@ -76,8 +76,10 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 	private T find(T element, BinaryNode<T> p) {
 		T result = null;
 		
-		// Basis p == null
-		if(p.getElement() != null) {
+		if(p == null) {
+			// basis
+		}
+		else if(p.getElement() != null) {
 			int comp = element.compareTo(p.getElement());
 			if(comp == 0)
 			{
@@ -165,7 +167,7 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 
 	@Override
 	public int getHeight() {
-		return getHeight(root);
+		return getHeight(root) - 1;
 	}
 	
 	private int getHeight(BinaryNode<T> node) {
