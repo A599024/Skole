@@ -27,16 +27,6 @@ public class SelectionSort {
 		
 	}
 	
-	
-	
-	
-	
-	
-	// Rekursive selection sort
-	public static <T extends Comparable<? super T>> void sortRecursive(T[] a, int first, int last) {
-		// TODO
-	}
-	
 	private static<T extends Comparable<? super T>> int getSmallestIndex(T[] a, int first, int last) {
 		T min = a[first];
 		int indexOfMin = first;

@@ -3,6 +3,9 @@ package TreeTest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Iterator;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -85,7 +88,25 @@ public abstract class TreeADTTest {
 		assertEquals(2, tree.getHeight());
 	}
 	
+	/*
+	@Test
+	public void inOrden() {
+		tree.add(2);
+		tree.add(1);
+		tree.add(6);
+		tree.add(4);
+		tree.add(7);
+		
+		Integer[] tall = {1, 2, 3, 4, 6, 7};
+		
+		int i = 0;
+		Iterator<Integer> it = tree.getInorderIterator();
+		while(it.hasNext()) {
+			assertEquals(tall[i], );
+		}
+	}
 	
+	*/
 	
 	
 }

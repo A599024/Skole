@@ -38,10 +38,9 @@ public class RadixSort {
 		int max = findLargest(data);
 		int maxDecimal = length(max);
 		
-		@SuppressWarnings("unchecked")
 		ArrayQueue<Integer>[] decimalQueue = new ArrayQueue[RADIX];
 		for(int i = 0; i < RADIX; i++) {
-			decimalQueue[i] = new ArrayQueue(n);
+			decimalQueue[i] = new ArrayQueue<>(n);
 		}
 		
 		int weight = 1;

@@ -97,6 +97,25 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 		return result;
 	}
 	
+	private BinaryNode<T> findNode(T element, BinaryNode<T> node) {
+		BinaryNode<T> result = null;
+		int compare = element.compareTo(node.getElement());
+		
+		if(node == null) {
+			// basis
+		}
+		else if(compare == 0) {
+			result = node;
+		}
+		else if(compare < 0) {
+			result = findNode(element, node.getLeft());
+		}
+		else if(compare > 0) {
+			result = findNode(element, node.getRight());
+		}
+		return result;
+	}
+	
 
 	@Override
 	public BinaryNode<T> add(T element) {
@@ -125,12 +144,53 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 		}
 		return p;
 	}
-	
 
-	@Override
+	
 	public T remove(T element) {
-		// TODO Auto-generated method stub
-		return null;
+		return remove(root, element).getElement();
+	}
+	
+	
+	public BinaryNode<T> remove(BinaryNode<T> rot, T element) {
+		if(rot == null)	return rot;
+		int compare = element.compareTo(rot.getElement());
+		
+		if(compare > 1)
+		{
+			rot.setRight(remove(rot.getRight(), element));
+		}
+		else if(compare < 1)
+		{
+			rot.setLeft(remove(rot.getLeft(), element));
+		}
+		else
+		{
+			if(rot.getLeft() == null && rot.getRight() == null)
+			{
+				rot = null;
+			}
+			else if(rot.getRight() != null)
+			{
+				rot.setElement(rot.getRight().getElement());
+				rot.setRight(remove(rot.getRight(), rot.getElement()));
+			}
+			else
+			{
+				rot.setElement(rot.getLeft().getElement());
+				rot.setLeft(remove(rot.getLeft(), rot.getElement()));;
+			}
+		}
+		return rot;
+	}
+	
+	
+	
+	private BinaryNode<T> findMin(BinaryNode<T> node) {
+		if(node.getLeft() == null)
+			return node;
+		
+		else
+			return findMin(node.getLeft());
 	}
 
 	@Override
@@ -186,9 +246,6 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 	}
 	
 	
-	
-	
-	
 	/**********************************
 		PRIVAT HJELPEKLASSE
 	**********************************/
@@ -227,4 +284,25 @@ public class BinaryTree<T extends Comparable<? super T>> implements TreeADTInter
 			return nextNode.getElement();
 		}
 	}
+	
+	public void printV() {
+		System.out.println("    " + root.getElement());
+		System.out.print("  " + root.getLeft().getElement() + "    " + root.getRight().getElement());
+		System.out.println();
+		
+		BinaryNode<T> left = root.getLeft();
+		BinaryNode<T> right = root.getRight();
+		
+		System.out.print(left.getLeft().getElement());
+		System.out.print("  ");
+		System.out.print(left.getRight().getElement());
+		System.out.print("  ");
+		System.out.print(right.getLeft().getElement());
+		System.out.print("  ");
+		System.out.print(right.getRight().getElement());
+		System.out.print("  ");
+		System.out.println();
+	
+	}
+
 }
